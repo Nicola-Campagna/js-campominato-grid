@@ -11,19 +11,52 @@
  *                                      *
 ****************************************/
 
+// bottone che permette di iniziare il gioco 
 const startGame = document.getElementById("button");
-console.log(startGame);
+// console.log(startGame);
+const numberTabs = 100;
+generateGridGame(startGame);
+// al click il bottone farà partire il gioco e uscire la griglia
+//funzione che permette questo:
 
+/****************************************
+ *                                      *
+ *          ADDEVENTLISTENER            *
+ *                                      *
+****************************************/
+startGame.addEventListener(
+    "click",
+    function () {
+        for (let i = 0; i < numberTabs; i++) {
+            const squareEl = document.createElement("div");
+            squareEl.innerHTML = i + 1;
+            squareEl.classList.add("square");
+            grid.append(squareEl);
+            console.log(squareEl + i);
 
+        }
+    }
+)
 
+squareEl.addEventListener(
+    "click",
+    function () {
+        for (let i = 0; i < numberTabs; i++) {
+            this.classList.toggle("active");
+        }
 
-
-
-
-
+    }
+)
 
 /****************************************
  *                                      *
  *             FUNCTIONS                *
  *                                      *
 ****************************************/
+function generateGridGame(grid) {
+    const whiteList = [];
+    for (let i = 0; i < numberTabs; i++) {
+        whiteList.push(i + 1);
+        // console.log(whiteList);
+    }
+}
