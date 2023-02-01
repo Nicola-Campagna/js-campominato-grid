@@ -11,19 +11,24 @@
  *                                      *
 ****************************************/
 
-// bottone che permette di iniziare il gioco 
+// bottone che permetterà di iniziare il gioco 
 const startGame = document.getElementById("button");
 // console.log(startGame);
+
+// numero tabelle presente nella griglia
 const numberTabs = 100;
-generateGridGame(startGame);
+
 // al click il bottone farà partire il gioco e uscire la griglia
-//funzione che permette questo:
+// richiamo della funzione che permette questo:
+generateGridGame(startGame);
+
 
 /****************************************
  *                                      *
  *          ADDEVENTLISTENER            *
  *                                      *
 ****************************************/
+// evento che genera le tabs
 startGame.addEventListener(
     "click",
     function () {
@@ -32,19 +37,17 @@ startGame.addEventListener(
             squareEl.innerHTML = i + 1;
             squareEl.classList.add("square");
             grid.append(squareEl);
-            console.log(squareEl + i);
+            // console.log(squareEl + i);
 
+            // evento che permette di selezionarle in rosso e deselezionarle
+            squareEl.addEventListener(
+                "click",
+                function () {
+                    this.classList.toggle("active");
+                    console.log("cella selezionata" + [i + 1]);
+                }
+            )
         }
-    }
-)
-
-squareEl.addEventListener(
-    "click",
-    function () {
-        for (let i = 0; i < numberTabs; i++) {
-            this.classList.toggle("active");
-        }
-
     }
 )
 
@@ -53,6 +56,8 @@ squareEl.addEventListener(
  *             FUNCTIONS                *
  *                                      *
 ****************************************/
+
+// funzione che genera la griglia di gioco
 function generateGridGame(grid) {
     const whiteList = [];
     for (let i = 0; i < numberTabs; i++) {
