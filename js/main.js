@@ -4,7 +4,6 @@
 // Ci saranno quindi 10 caselle per ognuna delle 10 righe.
 // Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata.
 
-
 /****************************************
  *                                      *
  *             ON LOAD                  *
@@ -18,36 +17,19 @@ const startGame = document.getElementById("button");
 // numero tabelle presente nella griglia
 const numberTabs = 100;
 
-// al click il bottone farà partire il gioco e uscire la griglia
-// richiamo della funzione che permette questo:
-generateGridGame(startGame);
-
-
 /****************************************
  *                                      *
  *          ADDEVENTLISTENER            *
  *                                      *
 ****************************************/
-// evento che genera le tabs
+
+// al click il bottone farà crea la griglia di gioco con le caselle
 startGame.addEventListener(
     "click",
     function () {
-        for (let i = 0; i < numberTabs; i++) {
-            const squareEl = document.createElement("div");
-            squareEl.innerHTML = i + 1;
-            squareEl.classList.add("square");
-            grid.append(squareEl);
-            // console.log(squareEl + i);
-
-            // evento che permette di selezionarle in rosso e deselezionarle
-            squareEl.addEventListener(
-                "click",
-                function () {
-                    this.classList.toggle("active");
-                    console.log("cella selezionata" + [i + 1]);
-                }
-            )
-        }
+        const gridEl = document.getElementById("grid");
+        gridEl.classList.add("grid");
+        generateGridGame(gridEl);
     }
 )
 
@@ -57,11 +39,39 @@ startGame.addEventListener(
  *                                      *
 ****************************************/
 
+/**
+ * @param {HTMLElement} grid 
+*/
+
 // funzione che genera la griglia di gioco
 function generateGridGame(grid) {
-    const whiteList = [];
-    for (let i = 0; i < numberTabs; i++) {
-        whiteList.push(i + 1);
-        // console.log(whiteList);
+    // const gridEl = document.getElementById("grid");
+    grid.innerHTML = "";
+    for (let i = 0; i < 100; i++) {
+        const testoCella = i + 1;
+        const cella = generaCasella(testoCella);
+        grid.append(cella);
+        // console.log(gridEl);
     }
+}
+
+/**
+ * @param { string } testo
+ * @return {HTMLElement}
+ */
+
+// funzione che genera le caselle di gioco all'interno della griglia
+function generaCasella(testo) {
+    const cellaEl = document.createElement("div");
+    cellaEl.classList.add("square");
+    cellaEl.innerHTML = testo;
+
+    cellaEl.addEventListener(
+        "click",
+        function () {
+            this.classList.toggle("active");
+            console.log(this.innerHTML);
+        }
+    )
+    return cellaEl;
 }
